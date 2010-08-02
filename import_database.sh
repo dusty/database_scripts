@@ -33,5 +33,5 @@ if [ -n "$SCHEMA" ];then
 fi
 
 echo "Importing data..."
-mysqlimport -u${DB_USER} -p${DB_PASS} -h ${DB_HOST} --local $DB ${DATA_DIR}/*.txt*
+mysqlimport -u${DB_USER} -p${DB_PASS} -h ${DB_HOST} --local --compact $DB ${DATA_DIR}/*.txt*
 echo "Complete"
