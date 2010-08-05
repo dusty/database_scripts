@@ -26,10 +26,11 @@ group[$current_group]=0
 
 for file in ${DATA_DIR}/*.txt*; do
   size=`stat -c%s $file`
+  name=`basename $file`
   group_dir=${DATA_DIR}/GROUP_${current_group}
   mkdir -p $group_dir
   mv $file $group_dir
-  echo "${file} to ${group_dir}"
+  echo "  Moved ${name} to ${group_dir}"
   group[$current_group]=$((group[current_group] + size))
   if [ ${group[$current_group]} -gt $group_size ]; then
     current_group=$((current_group + 1))
