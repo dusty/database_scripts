@@ -1,4 +1,40 @@
-Work Flow
+PROJECT
+
+Created to import large mysql database into AWS RDS instance.
+
+FILES
+
+COMMON.sh
+  Contains the variables that need to be configured as well as some common functions.
+
+export_database.sh
+  Exports a LOCAL db into two files per table.  A .sql file that contains the schema
+  information and a .txt file that contains the data.  The txt file is to be used
+  with the mysqlimport command for speed over importing a mysqldump.
+
+split_imports.sh
+  Imports go faster when the file is smaller.  This will split large .txt files (> 1G)
+  into multiple 1G files.
+  
+group_imports.sh
+  If the database is large, you can get a performance benefit by running concurrent
+  imports.  This will group the tables into directories.  It will first take all the
+  small files and group them into directories 5G or less.  Then it will go through
+  the files split with split_imports and group them into their own directory per table.
+
+create_database.sh
+  Shortcut to create the database if this is the first time.
+  
+import_schema.sh
+  Drops and recreates all tables based on the .sql files for the database.
+  
+import_data.sh
+  Imports the data for the tables using mysqlimport.  If you specify a group number it
+  will look for the files that were grouped by group_imports.  The idea is to run several
+  of these, one for each group, at the same time.  This could be done in the background
+  as shown below, or in a screen session.
+
+TYPICAL WORK FLOW
 
 # export_database.sh my_database
 # split_imports.sh my_database
