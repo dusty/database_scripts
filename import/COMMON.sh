@@ -16,8 +16,8 @@ SPLIT_FILE_SIZE=1073741824
 # arguments to split
 SPLIT_SIZE_PARAM=1024m
 
-# number of groups for concurrent imports
-GROUP_COUNT=5
+# max size for a regular txt group
+GROUP_MAX_SIZE=$((SPLIT_FILE_SIZE * 5))
 
 function set_data_dir() {
   if [ -z "$DB" ]; then
