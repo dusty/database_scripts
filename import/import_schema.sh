@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DB=$1
-SCHEMA=$2
 DB_USER=
 DB_PASS=
 DB_HOST=
@@ -19,14 +18,11 @@ if [ \! -d "$DATA_DIR" ]; then
   exit 1
 fi
 
-if [ -n "$SCHEMA" ];then
-  echo "Importing schema..."
-  for schema in ${DATA_DIR}/*.sql; do
-    name=`basename $schema`
-    echo "  Import: ${name}"
-    mysql -u${DB_USER} -p${DB_PASS} -h ${DB_HOST} $DB < $schema
-  done
-  echo "Complete"
-  echo ""
-fi
+echo "Importing schema..."
+for schema in ${DATA_DIR}/*.sql; do
+  name=`basename $schema`
+  echo "  Import: ${name}"
+  mysql -u${DB_USER} -p${DB_PASS} -h ${DB_HOST} $DB < $schema
+done
+echo "Complete"
 

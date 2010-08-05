@@ -8,10 +8,10 @@ DB_HOST=
 
 BASE_DIR=/mnt/database_exports/data
 
-if [ -n "$GROUP" ];then
-  DATA_DIR=${BASE_DIR}/${DB}
-else
+if [ -n "$GROUP" ]; then
   DATA_DIR=${BASE_DIR}/${DB}/GROUP_${GROUP}
+else
+  DATA_DIR=${BASE_DIR}/${DB}
 fi
 
 if [ $# -lt 1 ]; then
