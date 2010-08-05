@@ -3,6 +3,7 @@ Work Flow
 # export_database.sh my_database
 # split_imports.sh my_database
 # group_imports.sh my_database
+# create_database.sh my_database
 # import_schema.sh my_database
 # import_data.sh my_database 1 & 
 # import_data.sh my_database 2 &
