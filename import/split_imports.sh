@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DB=$1
+
 source 'COMMON.sh'
 set_data_dir
 
