@@ -1,14 +1,10 @@
 #!/bin/bash
 
-source 'COMMON.sh'
-
 DB=$1
-DATA_DIR=${BASE_DIR}/${DB}
 
-if [ $# -lt 1 ]; then
-  echo "Usage: group_exports.sh <database>"
-  exit 1
-fi
+source 'COMMON.sh'
+set_data_dir
+check_data_dir
 
 echo "Grouping files..."
 cd $DATA_DIR
