@@ -10,14 +10,12 @@ BASE_DIR=/mnt/database_exports/data
 DATA_DIR=${BASE_DIR}/${DB}
 
 if [ $# -lt 1 ]; then
-  echo "Usage: import_database.sh <database> (*schema)"
-  echo "  * Add any second argument to drop/create schemas"
+  echo "Usage: import_schema.sh <database>"
   exit 1
 fi
 
 if [ \! -d "$DATA_DIR" ]; then
   echo "Directory ${DATA_DIR} does not exist"
-  echo "Run export_database.sh to create"
   exit 1
 fi
 
@@ -32,6 +30,3 @@ if [ -n "$SCHEMA" ];then
   echo ""
 fi
 
-echo "Importing data..."
-mysqlimport -u${DB_USER} -p${DB_PASS} -h ${DB_HOST} --local --compact $DB ${DATA_DIR}/*.txt*
-echo "Complete"
