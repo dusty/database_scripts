@@ -1,11 +1,8 @@
 #!/bin/bash
 
-DB=$1
-DB_USER=
-DB_PASS=
-DB_HOST=
+source 'COMMON.sh'
 
-BASE_DIR=/mnt/database_exports/data
+DB=$1
 DATA_DIR=${BASE_DIR}/${DB}
 
 if [ $# -lt 1 ]; then
@@ -22,7 +19,7 @@ echo "Importing schema..."
 for schema in ${DATA_DIR}/*.sql; do
   name=`basename $schema`
   echo "  Import: ${name}"
-  mysql -u${DB_USER} -p${DB_PASS} -h ${DB_HOST} $DB < $schema
+  mysql -u${REMOTE_DB_USER} -p${REMOTE_DB_PASS} -h ${REMOTE_DB_HOST} $DB < $schema
 done
 echo "Complete"
 

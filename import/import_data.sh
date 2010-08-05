@@ -1,12 +1,9 @@
 #!/bin/bash
 
+source 'COMMON.sh'
+
 DB=$1
 GROUP=$2
-DB_USER=
-DB_PASS=
-DB_HOST=
-
-BASE_DIR=/mnt/database_exports/data
 
 if [ -n "$GROUP" ]; then
   DATA_DIR=${BASE_DIR}/${DB}/GROUP_${GROUP}
@@ -25,6 +22,6 @@ if [ \! -d "$DATA_DIR" ]; then
 fi
 
 echo "Importing data..."
-mysqlimport -u${DB_USER} -p${DB_PASS} -h ${DB_HOST} --local $DB ${DATA_DIR}/*.txt*
+mysqlimport -u${REMOTE_DB_USER} -p${REMOTE_DB_PASS} -h ${REMOTE_DB_HOST} --local $DB ${DATA_DIR}/*.txt*
 echo "Complete"
 

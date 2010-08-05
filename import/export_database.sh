@@ -1,10 +1,8 @@
 #!/bin/bash
 
+source 'COMMON.sh'
+
 DB=$1
-DB_USER=
-DB_PASS=
-DB_HOST=
-BASE_DIR=/mnt/database_exports/data
 DATA_DIR=${BASE_DIR}/${DB}
 
 if [ $# -lt 1 ]; then
@@ -20,5 +18,5 @@ mkdir -p $DATA_DIR
 chmod 777 $DATA_DIR
 
 echo "Exporting tables..."
-mysqldump -u${DB_USER} --tab ${DATA_DIR} $DB
+mysqldump -u${LOCAL_DB_USER} -p${LOCAL_DB_PASS} --tab ${DATA_DIR} $DB
 echo "Complete"
