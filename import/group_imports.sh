@@ -36,16 +36,16 @@ done
 # a write lock will be held on the table
 last_prefix=""
 for file in ${DATA_DIR}/*.txt_*; do
-	name=`basename $file`
-	prefix=`echo $name | sed 's/.txt_.*$//g'`
-	if [ "$last_prefix" -ne "$prefix" ]; then
-	  current_group=$((current_group + 1))
+  name=`basename $file`
+  prefix=`echo $name | sed 's/.txt_.*$//g'`
+  if [ "$last_prefix" != "$prefix" ]; then
+    current_group=$((current_group + 1))
   fi
-	group_dir=${DATA_DIR}/GROUP_${current_group}
-	mkdir -p $group_dir
-	mv $file $group_dir
-	echo "  Moved ${name} to ${group_dir}"
-	last_prefix=$prefix
+  group_dir=${DATA_DIR}/GROUP_${current_group}
+  mkdir -p $group_dir
+  mv $file $group_dir
+  echo "  Moved ${name} to ${group_dir}"
+  last_prefix=$prefix
 done
 	  
 
